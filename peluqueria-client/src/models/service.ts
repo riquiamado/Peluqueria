@@ -5,7 +5,9 @@ export interface Service {
     duration: string;
     description:string;
     price: number;
-    image:string
+    image: {
+      secure_url: string;
+    };
   }
 
   

@@ -25,7 +25,7 @@ export const useStore = create<State>((set, get) => ({
   },
   createServicio: async (servicio) => {
     try {
-      const response = await axios.post('/api/servicios', servicio);
+      const response = await axios.post('http://localhost:3001/servicios', servicio);
       get().setServicios([...get().servicios, response.data]);
     } catch (error) {
       console.error('Error al crear el servicio:', error);

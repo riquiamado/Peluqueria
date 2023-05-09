@@ -7,10 +7,17 @@ cloudinary.config({
     api_secret:"A_35vLTBZLzVz2x3cXEBtNuqo4Y"
 })
 
+// const uploadimagen = (filepatch)=>{
+//     return cloudinary.v2.uploader.upload(filepatch,{
+//         folder:"services"
+//     })
+// }
 const uploadimagen = (filepatch)=>{
     return cloudinary.v2.uploader.upload(filepatch,{
         folder:"services"
-    })
+    }, function(error, result) {
+        console.log(error, result);
+    });
 }
 
 const deleteImage = async (publicId) => {
