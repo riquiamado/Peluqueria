@@ -8,12 +8,14 @@ import {
   Container,
   CardActionArea,
   CardMedia,
+  Pagination
 } from "@mui/material";
 import { useStore } from "../store/services";
+import React from "react";
 
 const ServicioCard = ({ servicio }: { servicio: Service }) => {
   return (
-    <Card sx={{marginBottom:"10px"}}>
+    <Card sx={{marginBottom:"10px", marginTop:"50px"}}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -41,7 +43,16 @@ const ServicioCard = ({ servicio }: { servicio: Service }) => {
 
 const ServicioList = () => {
   const servicios = useStore((state) => state.servicios);
+  console.log("Actualizando servicios en el store:", servicios);
   const fetchServicios = useStore((state) => state.fetchServicios);
+  const [page, setPage] = React.useState(1);
+
+  const servicesPerPage = 2;
+  const startIndex = (page - 1) * servicesPerPage;
+  const displayedServices = servicios.slice(startIndex, startIndex + servicesPerPage);
+  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     fetchServicios();
@@ -49,13 +60,14 @@ const ServicioList = () => {
 
   return (
     <Container>
-      <Grid container spacing={3}>
-        {servicios?.map((servicio) => (
+      <Grid container spacing={3} marginTop={10}>
+        {displayedServices?.map((servicio) => (
           <Grid item xs={12} sm={6} md={4} key={servicio._id}>
             <ServicioCard servicio={servicio} />
           </Grid>
         ))}
       </Grid>
+      <Pagination count={Math.ceil(servicios.length / servicesPerPage)} page={page} onChange={handleChangePage} sx={{marginTop:"50px"}} />
     </Container>
   );
 };

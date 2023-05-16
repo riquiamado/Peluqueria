@@ -5,10 +5,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 //import AdbIcon from '@mui/icons-material/Adb';
 //import { useStore } from '../store/navbar';
 import logo from "../assets/logo.jpg"
+import { Link } from 'react-scroll';
 
 
- const pages = ['Servicios', 'Turnos', 'Productos'];
+
+ const pages = ["Sobre mi",'Servicios', 'Turnos', 'Productos'];
  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+ const sections = ['sobre mi','servicios', 'turnos', 'productos'];
+
 
 const Navbar: React.FC = () => {
   // const open = useStore((state) => state.open);
@@ -37,7 +41,7 @@ const Navbar: React.FC = () => {
   // };
 
   return (
-    <AppBar position="static">
+    <AppBar position="sticky">
       <Container maxWidth="xl" >
       <Toolbar disableGutters>
       <Avatar alt="logo" src={logo} variant='square' sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} style={{ width: '200px', height: '70px' ,borderRadius:'10px',marginRight:0}} />
@@ -97,14 +101,21 @@ const Navbar: React.FC = () => {
              ANGEL ORONA
            </Typography>
            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex'  },justifyContent:"flex-end" }}>
-             {pages.map((page) => (
-               <Button
-                 key={page}
-                 onClick={handleCloseNavMenu}
-                 sx={{ my: 2, color: 'white', display: 'block' }}
-               >
-                 {page}
-               </Button>
+             {pages.map((page,index) => (
+              <Link
+              key={page}
+              to={sections[index]}
+              smooth={true}
+              duration={500}
+              offset={-70}
+          >
+              <Button
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                  {page}
+              </Button>
+          </Link>
              ))}
            </Box>
 

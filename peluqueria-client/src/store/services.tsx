@@ -14,6 +14,7 @@ interface State {
 export const useStore = create<State>((set, get) => ({
   servicios: [],
   setServicios: (servicios) => set({ servicios }),
+  
   fetchServicios: async () => {
     try {
       const response = await axios.get('http://localhost:3001/services');
