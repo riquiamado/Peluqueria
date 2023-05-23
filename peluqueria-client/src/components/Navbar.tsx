@@ -6,8 +6,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 //import { useStore } from '../store/navbar';
 import logo from "../assets/logo.jpg"
 import { Link } from 'react-scroll';
+import RegistrationForm from './RegistrationForm';
 
-
+  
 
  const pages = ["Sobre mi",'Servicios', 'Turnos', 'Productos'];
  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -20,6 +21,7 @@ const Navbar: React.FC = () => {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+  const [activeSetting, setActiveSetting] = React.useState('');
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -36,9 +38,10 @@ const Navbar: React.FC = () => {
     setAnchorElUser(null);
   };
 
-  // const handleMenuClick = () => {
-  //   setOpen(!open);
-  // };
+  const handleSettingClick = (setting: string) => {
+    setActiveSetting(setting);
+    handleCloseUserMenu();
+  };
 
   return (
     <AppBar position="sticky">
@@ -142,7 +145,7 @@ const Navbar: React.FC = () => {
                onClose={handleCloseUserMenu}
              >
                {settings.map((setting) => (
-                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                 <MenuItem key={setting} onClick={()=>handleSettingClick(setting)}>
                    <Typography textAlign="center">{setting}</Typography>
                  </MenuItem>
                ))}
@@ -151,9 +154,28 @@ const Navbar: React.FC = () => {
        
       </Toolbar>
       </Container>
+      {activeSetting && <RenderSettingComponent setting={activeSetting} />}
     </AppBar>
   );
 };
 
 export default Navbar;
+
+const RenderSettingComponent: React.FC<{ setting: string }> = ({ setting }) => {
+  // Renderiza el componente correspondiente al setting activo
+  // Puedes agregar más casos según los settings disponibles y sus componentes asociados
+  switch (setting) {
+    case 'Profile':
+      return <RegistrationForm />;
+    // case 'Account':
+    //   return <AccountComponent />;
+    // case 'Dashboard':
+    //   return <DashboardComponent />;
+    // case 'Logout':
+    //   return <LogoutComponent />;
+    default:
+      return null;
+  }
+};
+
 

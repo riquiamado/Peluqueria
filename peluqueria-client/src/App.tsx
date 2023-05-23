@@ -10,7 +10,7 @@ function App() {
   return (
     <>
      <Navbar/>
-    
+      
      <section id='sobre mi'>
      <ProfileCard/>
      </section>
