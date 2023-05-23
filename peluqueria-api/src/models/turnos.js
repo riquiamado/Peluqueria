@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const TurnoSchema = new mongoose.Schema({
   fecha: { type: Date, required: true },
+  time: {
+    type: Date,
+    required: true,
+  },
   cliente: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Cliente",

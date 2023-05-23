@@ -52,4 +52,10 @@ router.use(post_turnos)
 router.use(put_turnos)
 router.use(delete_turnos)
 
+//login
+
+const get_login= require("./login/login")
+
+router.use(get_login)
+
 module.exports = router;

@@ -2,9 +2,10 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const uniqueValidator = require("mongoose-unique-validator");
 
 const clientSchema = new Schema({
-    name:{
+    fullName:{
         type: String,
         require:true
     },
@@ -16,6 +17,9 @@ const clientSchema = new Schema({
        type: String,
        require:true
     },
+    passwordHash: {
+      type: String,
+    },
     appointments: [{ type: Schema.Types.ObjectId, ref: 'Appointment' }]
     },
     {
@@ -25,6 +29,6 @@ const clientSchema = new Schema({
 )
 
   const Client = mongoose.model('Client', clientSchema);
-
+  clientSchema.plugin(uniqueValidator)
 
 module.exports = Client

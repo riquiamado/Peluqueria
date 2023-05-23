@@ -6,7 +6,7 @@ router.delete("/users/:id",async(req,res)=>{
     const{id}=req.params;
     try {
     const deleteUsers = await Client.findByIdAndDelete(id);
-    res.json(deleteUsers)    
+    res.json("el usuario fue borrado satisfactoriamente")    
     } catch (error) {
         res.status(400).json({ message: err.message });    
     }

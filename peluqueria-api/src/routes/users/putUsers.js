@@ -4,10 +4,10 @@ const router = express.Router();
 
 
 router.put("/users/:id",async(req,res)=>{
-    const {name,email,phone}=req.body;
+    const {fullName,email,phone}=req.body;
     const {id}=req.params;    
     try {
-    const updateUsers = await Client.findByIdAndUpdate(id,{name,email,phone},
+    const updateUsers = await Client.findByIdAndUpdate(id,{fullName,email,phone},
         {new:true}) ;
         res.json(updateUsers)   
     } catch (error) {
